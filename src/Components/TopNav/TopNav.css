@@ -40,7 +40,7 @@
 .links {
   max-height: 80px;
 }
-.links a {
+.links .navLink {
   text-decoration: none;
   color: black;
   font-size: 25px;
@@ -52,13 +52,13 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .links a {
+  .links .navLink {
     font-size: 20px;
   }
 }
 
 @media only screen and (max-width: 750px) {
-  .links a {
+  .links .navLink {
     font-size: 15px;
   }
 }
@@ -83,7 +83,7 @@
     flex-direction: column;
     align-items: center;
   }
-  .leftside #hidden a {
+  .leftside #hidden .navLink {
     margin: 10px;
     font-size: 25px;
   }

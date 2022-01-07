@@ -1,16 +1,27 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./TopNav.css";
 import { SearchOutlined, MenuFoldOutlined } from "@ant-design/icons";
-function TopNav() {
+function TopNav({ iconShow }) {
   const [showLinks, setshowLinks] = useState(true);
   return (
     <div className="navbar">
       <div className="leftside">
         <div className="links" id={showLinks ? "hidden" : ""}>
-          <a to="/">Home</a>
-          <a to="/">Hotels</a>
-          <a to="/booking">Booking</a>
-          <a to="/login">Login</a>
+          <Link className="navLink" to="/">
+            Home
+          </Link>
+          <Link to="/" className="navLink">
+            Hotels
+          </Link>
+          <Link to="/booking" className="navLink">
+            Booking
+          </Link>
+          {iconShow && (
+            <Link to="/login" className="navLink">
+              Login
+            </Link>
+          )}
         </div>
         <button
           className="navButton"
