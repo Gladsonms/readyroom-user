@@ -1,7 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+import { useNavigate } from "react-router-dom";
+
 function Signup() {
+  const [username, setusername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //console.log(username, email, password, confirmPassword, phone);
+    try {
+      const res = await axios.post(`http://localhost:8000/userregister`, {
+        username,
+        email,
+        phone,
+        password,
+      });
+
+      toast.success("Register sucess.Please Login");
+      navigate("/login");
+    } catch (error) {
+      if (error.response.status == 400) {
+        const { err } = error.response.data;
+        toast.error(err);
+        //toast.error("error in signup");
+      }
+    }
+  };
   return (
     <div className="outer-div">
       <div className="global-container">
@@ -9,7 +43,7 @@ function Signup() {
           <div className="card-body">
             <h1 className="card-title text-center">Signup</h1>
             <div className="card-text">
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label for="exampleInputuseranme" className="form-label">
                     Useraname
@@ -20,6 +54,10 @@ function Signup() {
                     className="form-control form-control-sm"
                     name="username"
                     placeholder="Enter Your username.."
+                    value={username}
+                    onChange={(e) => {
+                      setusername(e.target.value);
+                    }}
                   />
                 </div>
                 {/* Email */}
@@ -33,6 +71,10 @@ function Signup() {
                     className="form-control form-control-sm"
                     name="email"
                     placeholder="Enter Your email.."
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 {/* Phone */}
@@ -46,6 +88,8 @@ function Signup() {
                     className="form-control form-control-sm"
                     name="phone"
                     placeholder="Enter Your number.."
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
                 {/* password */}
@@ -54,11 +98,15 @@ function Signup() {
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     className="form-control form-control-sm"
                     name="password"
                     placeholder="Enter Your password.."
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
                 {/*confirm  password */}
@@ -67,11 +115,15 @@ function Signup() {
                     Confirm Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     className="form-control form-control-sm"
                     name="password"
                     placeholder="Enter Your password again.."
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
                   />
                   <button type="submit" className="btn btn-primary btn-block">
                     Signup

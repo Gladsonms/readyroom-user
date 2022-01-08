@@ -5,11 +5,14 @@ import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
 import TopNav from "./Components/TopNav/TopNav";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer position="top-center" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
