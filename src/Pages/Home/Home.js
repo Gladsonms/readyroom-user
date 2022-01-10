@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import TopNav from "../../Components/TopNav/TopNav";
+import { TopNav } from "../../Components";
 
 function Home() {
   const { user } = useSelector((state) => ({ ...state }));

@@ -9,7 +9,7 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import rootReducer from "./Reducers/index";
+import rootReducer from "./redux/store";
 
 //create a redux store
 const store = createStore(rootReducer, composeWithDevTools());

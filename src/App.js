@@ -1,9 +1,5 @@
 import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
-import Booking from "./Pages/Booking/Booking";
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import Signup from "./Pages/Signup/Signup";
-import TopNav from "./Components/TopNav/TopNav";
+import { Booking, Home, Login, Signup } from "./Pages";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

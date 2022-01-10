@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 
-import { userRegister } from "../..//actions/auth";
+import { userRegister } from "../../actions/auth";
 
 function Signup() {
   const [username, setusername] = useState("");
