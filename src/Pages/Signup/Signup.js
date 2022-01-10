@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 
+import { userRegister } from "../..//actions/auth";
+
 function Signup() {
   const [username, setusername] = useState("");
   const [email, setEmail] = useState("");
@@ -18,8 +20,9 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(username, email, password, confirmPassword, phone);
+
     try {
-      const res = await axios.post(`http://localhost:8000/userregister`, {
+      const res = await userRegister({
         username,
         email,
         phone,
@@ -30,9 +33,8 @@ function Signup() {
       navigate("/login");
     } catch (error) {
       if (error.response.status == 400) {
-        const { err } = error.response.data;
-        toast.error(err);
-        //toast.error("error in signup");
+        const { message } = error.response.data;
+        toast.error(message);
       }
     }
   };
@@ -125,7 +127,17 @@ function Signup() {
                       setConfirmPassword(e.target.value);
                     }}
                   />
-                  <button type="submit" className="btn btn-primary btn-block">
+                  <button
+                    disabled={
+                      !username ||
+                      !email ||
+                      !password ||
+                      !confirmPassword ||
+                      !phone
+                    }
+                    type="submit"
+                    className="btn btn-primary btn-block"
+                  >
                     Signup
                   </button>
                   <div className="signin">

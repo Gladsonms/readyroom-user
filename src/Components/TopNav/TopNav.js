@@ -1,9 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./TopNav.css";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+
+import "./TopNav.css";
+
 function TopNav({ iconShow }) {
   const [showLinks, setshowLinks] = useState(true);
+  const auth = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    window.localStorage.removeItem("userdata");
+    navigate("/login");
+  };
   return (
     <div className="navbar">
       <div className="leftside">
@@ -17,10 +31,20 @@ function TopNav({ iconShow }) {
           <Link to="/booking" className="navLink">
             Booking
           </Link>
-          {iconShow && (
-            <Link to="/login" className="navLink">
-              Login
-            </Link>
+
+          {auth !== null && (
+            <span className="navLink" id="logoutBtn" onClick={logout}>
+              Logout
+            </span>
+          )}
+          {auth === null && (
+            <>
+              {iconShow && (
+                <Link to="/login" className="navLink">
+                  Login
+                </Link>
+              )}
+            </>
           )}
         </div>
         <button

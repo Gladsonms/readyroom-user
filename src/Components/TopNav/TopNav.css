@@ -6,6 +6,10 @@
   display: flex;
 }
 
+#logoutBtn {
+  cursor: pointer;
+}
+
 .leftside {
   flex: 5;
   display: flex;
